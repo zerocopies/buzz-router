@@ -68,6 +68,8 @@ impl ExecutionState {
             (Self::Routing, Self::Thinking) => true,
             (Self::Thinking, Self::ToolIntercepted) => true,
             (Self::Thinking, Self::Completing) => true,
+            (Self::Thinking, Self::Validating) => true,
+            (Self::Completing, Self::Validating) => true,
             (Self::ToolIntercepted, Self::ToolExecute) => true,
             (Self::ToolIntercepted, Self::Idle) => true,
             (Self::ToolExecute, Self::Observing) => true,
