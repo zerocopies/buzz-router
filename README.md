@@ -64,7 +64,7 @@ Client Request
 
 ```bash
 # Clone
-git clone https://github.com/zerocopies/Buffer-Zone-V1
+git clone https://github.com/zerocopies/buzz-router
 cd buzz-router
 
 # Configure
@@ -217,7 +217,6 @@ Part of the Zero Copies stack:
 - **buzz-router** — HTTP governance layer
 - **Crossway** — agent orchestration framework
 
----
 
 ## License
 
