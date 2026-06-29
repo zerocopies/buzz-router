@@ -64,7 +64,7 @@ Client Request
 
 ```bash
 # Clone
-git clone https://github.com/zerocopies/buzz-router
+git clone https://github.com/zerocopies/Buffer-Zone-V1
 cd buzz-router
 
 # Configure
