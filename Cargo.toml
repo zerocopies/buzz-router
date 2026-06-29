@@ -1,5 +1,5 @@
 [package]
-name = "buffer_zone"
+name = "buzz_router"
 version = "0.1.0"
 edition = "2021"
 
@@ -8,6 +8,7 @@ edition = "2021"
 anyhow = "1.0.81"
 uuid = { version = "1.7", features = ["v4", "serde"] }
 chrono = { version = "0.4", features = ["serde"] }
+qfz3 = { path = "/home/prp/qfz3" }
 
 # Serialization
 serde = { version = "1.0", features = ["derive"] }

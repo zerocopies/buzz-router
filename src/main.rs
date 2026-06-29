@@ -1,10 +1,10 @@
-use buffer_zone::boundary::BoundaryEnforcer;
-use buffer_zone::capabilities::CapabilityRegistry;
-use buffer_zone::engine::tools::ToolRegistry;
-use buffer_zone::engine::ExecutionEngine;
-use buffer_zone::memory::MemoryStore;
-use buffer_zone::server::{create_router, AppState};
-use buffer_zone::session::SessionManager;
+use buzz_router::boundary::BoundaryEnforcer;
+use buzz_router::capabilities::CapabilityRegistry;
+use buzz_router::engine::tools::ToolRegistry;
+use buzz_router::engine::ExecutionEngine;
+use buzz_router::memory::MemoryStore;
+use buzz_router::server::{create_router, AppState};
+use buzz_router::session::SessionManager;
 
 use std::path::Path;
 use std::sync::Arc;

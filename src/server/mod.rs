@@ -354,6 +354,14 @@ async fn handle_stats() -> Json<serde_json::Value> {
     }))
 }
 
+async fn handle_shutdown() -> Json<serde_json::Value> {
+    tokio::spawn(async {
+        tokio::time::sleep(tokio::time::Duration::from_millis(200)).await;
+        std::process::exit(0);
+    });
+    Json(serde_json::json!({"status": "shutting_down"}))
+}
+
 pub fn create_router(state: AppState) -> Router {
     Router::new()
         .route("/chat", post(handle_chat))
@@ -368,5 +376,6 @@ pub fn create_router(state: AppState) -> Router {
         .route("/new_session", post(handle_new_session))
         .route("/", get(handle_ui))
         .route("/stats", get(handle_stats))
+        .route("/shutdown", post(handle_shutdown))
         .with_state(state)
 }

@@ -243,7 +243,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--on);font-
       <button class="icon-btn" title="Collapse right panel" onclick="togglePanel(&#39;rail&#39;)" style="font-size:14px">›</button>
       <button class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></button>
       <button class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></button>
-      <button class="deploy-btn">Deploy</button>
+      <button class="deploy-btn" id="deployBtn" onclick="toggleDeploy()">Deploy</button>
     </div>
   </header>
   <div class="hud"><div class="hud-dot"></div><span>SECURE LOCAL PIPELINE ACTIVE &nbsp;·&nbsp; ZERO COPIES GUARANTEED</span></div>
@@ -468,6 +468,48 @@ function updateGauge(tps){
   makeDrag('leftDrag','sidebar','left');
   makeDrag('rightDrag','rail','right');
 })();
+
+// ── Deploy (start/stop Buzz Router) ──
+let isDeployed = false;
+
+async function toggleDeploy(){
+  const btn = document.getElementById('deployBtn');
+  if(isDeployed){
+    try{
+      await fetch(SERVER+'/shutdown', {method:'POST'});
+    }catch(e){}
+    isDeployed = false;
+    btn.textContent = 'Deploy';
+    btn.style.background = 'var(--blue)';
+    document.getElementById('modelState').textContent = 'OFFLINE';
+  } else {
+    // Check if already running
+    try{
+      const r = await fetch(SERVER+'/health', {signal: AbortSignal.timeout(2000)});
+      if(r.ok){
+        isDeployed = true;
+        btn.textContent = 'Stop';
+        btn.style.background = '#E10600';
+        document.getElementById('modelState').textContent = 'CONNECTED';
+      }
+    } catch(e){
+      document.getElementById('modelState').textContent = 'OFFLINE — run start.sh first';
+    }
+  }
+}
+
+// Auto-detect on load
+setTimeout(async ()=>{
+  try{
+    const r = await fetch(SERVER+'/health', {signal: AbortSignal.timeout(2000)});
+    if(r.ok){
+      isDeployed = true;
+      const btn = document.getElementById('deployBtn');
+      btn.textContent = 'Stop';
+      btn.style.background = '#E10600';
+    }
+  }catch(e){}
+}, 1000);
 
 // ── File attachment ──
 let attachedFileContent = null;

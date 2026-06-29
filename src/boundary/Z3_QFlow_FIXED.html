@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @keyframes zblink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+  @keyframes zpulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+  *{ box-sizing:border-box; }
+  ::-webkit-scrollbar{ width:10px;height:10px } ::-webkit-scrollbar-thumb{ background:rgba(255,255,255,.12); border-radius:8px }
+</style>
+</helmet>
+
+<div style="width:max-content; min-width:100%; min-height:100vh; box-sizing:border-box; padding:56px; background:#e7e5df; font-family:'Geist',sans-serif; -webkit-font-smoothing:antialiased;">
+
+  <!-- ======================= HEADER ======================= -->
+  <div style="max-width:1180px; margin-bottom:64px;">
+    <div style="display:flex; align-items:center; gap:14px; margin-bottom:30px;">
+      <svg width="40" height="40" viewBox="0 0 28 28" aria-hidden="true">
+        <rect width="28" height="28" rx="9" fill="#202125"/>
+        <rect x="1" y="1" width="26" height="26" rx="8" fill="none" stroke="#7FB0FF" stroke-width="1" opacity="0.4"/>
+        <path d="M9 9 H19 L9 19 H19" stroke="#7FB0FF" stroke-width="2.3" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <div style="font-size:19px; font-weight:600; color:#16181B; letter-spacing:-0.02em;">Zero Copies</div>
+        <div style="font-size:13px; color:#6b6b6b; font-family:'Geist Mono',monospace;">Z3&nbsp;Q-Flow</div>
+      </div>
+    </div>
+    <div style="font-size:40px; font-weight:600; color:#16181B; letter-spacing:-0.03em; line-height:1.08; max-width:760px; text-wrap:balance;">A local-AI workspace that keeps <span style="color:#5f7fce;">literally zero copies</span> off your machine.</div>
+    <div style="font-size:17px; color:#5a5a57; line-height:1.55; max-width:680px; margin-top:20px;">Chat, model library, hardware telemetry and document tools — all running on-device. Below: the chat workspace in three directions, then the supporting screens in the leading direction. Static hi-fi mockups, desktop.</div>
+    <div style="display:flex; gap:36px; margin-top:34px; flex-wrap:wrap;">
+      <div style="max-width:215px;"><div style="font-family:'Geist Mono',monospace; font-size:11px; letter-spacing:0.08em; color:#5f7fce; text-transform:uppercase; margin-bottom:7px;">Type</div><div style="font-size:13.5px; color:#54544f; line-height:1.5;">Geist for UI, Geist&nbsp;Mono for every number &amp; telemetry value.</div></div>
+      <div style="max-width:215px;"><div style="font-family:'Geist Mono',monospace; font-size:11px; letter-spacing:0.08em; color:#5f7fce; text-transform:uppercase; margin-bottom:7px;">Palette</div><div style="font-size:13.5px; color:#54544f; line-height:1.5;">Matte graphite base; celestial&nbsp;blue, lavender, pink &amp; soft yellow as gentle, purposeful accents.</div></div>
+      <div style="max-width:215px;"><div style="font-family:'Geist Mono',monospace; font-size:11px; letter-spacing:0.08em; color:#5f7fce; text-transform:uppercase; margin-bottom:7px;">Hook</div><div style="font-size:13.5px; color:#54544f; line-height:1.5;">A persistent &ldquo;Local&nbsp;·&nbsp;0&nbsp;copies&rdquo; status — the brand promise, always visible.</div></div>
+      <div style="max-width:215px;"><div style="font-family:'Geist Mono',monospace; font-size:11px; letter-spacing:0.08em; color:#5f7fce; text-transform:uppercase; margin-bottom:7px;">Tone</div><div style="font-size:13.5px; color:#54544f; line-height:1.5;">Premium consumer-grade. Calm dark surfaces, crisp hairlines, real depth.</div></div>
+    </div>
+  </div>
+
+  <div style="position:relative; filter: saturate(0.7) contrast(0.97) brightness(1.03); transition: filter .35s ease;">
+    <div style="position:absolute; inset:0; z-index:0; pointer-events:none; background: radial-gradient(40% 40% at 18% 16%, rgba(127,176,255,0.30), transparent 70%), radial-gradient(46% 46% at 84% 30%, rgba(185,172,246,0.28), transparent 72%), radial-gradient(52% 46% at 60% 94%, rgba(240,166,201,0.24), transparent 72%); transition: background .35s ease;"></div>
+    <div style="position:relative; z-index:1;">
+
+  <!-- ======================= SECTION 1: CHAT DIRECTIONS ======================= -->
+  <div style="margin-bottom:22px;">
+    <div style="font-size:13px; font-weight:600; color:#16181B; font-family:'Geist Mono',monospace; letter-spacing:0.04em;">01 — THE CHAT WORKSPACE · THREE DIRECTIONS</div>
+    <div style="font-size:14px; color:#7a7a76; margin-top:6px;">Same product, three takes — from a by-the-book three-pane studio to a focused canvas to a command-driven palette.</div>
+  </div>
+
+  <div style="display:flex; gap:56px; align-items:flex-start; margin-bottom:72px;">
+
+    <!-- ---------- DIRECTION A: STUDIO ---------- -->
+    <div style="flex:none; width:1440px;">
+      <div style="font-family:'Geist Mono',monospace; font-size:11.5px; letter-spacing:0.06em; color:#56564f; text-transform:uppercase; margin-bottom:13px;">Direction A — &ldquo;Studio&rdquo; · classic three-pane</div>
+      <div style="width:1440px; height:900px; background:#202125; border-radius:12px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.28); border:1px solid rgba(0,0,0,.4); display:flex; color:#F2F3F5;">
+
+        <!-- LEFT RAIL -->
+        <div style="width:268px; flex:none; background:#25262A; border-right:1px solid rgba(255,255,255,.06); display:flex; flex-direction:column;">
+          <div style="height:60px; flex:none; display:flex; align-items:center; gap:11px; padding:0 18px; border-bottom:1px solid rgba(255,255,255,.05);">
+            <svg width="26" height="26" viewBox="0 0 28 28"><rect width="28" height="28" rx="8" fill="#232C3C"/><path d="M9 9 H19 L9 19 H19" stroke="#7FB0FF" stroke-width="2.3" fill="none" stroke-linejoin="round" stroke-linecap="round"/></svg>
+            <div style="line-height:1.1;"><div style="font-size:13.5px; font-weight:600;">Z3 Q-Flow</div><div style="font-size:10.5px; color:#5E646C; font-family:'Geist Mono',monospace;">Zero Copies</div></div>
+            <div style="margin-left:auto; width:26px; height:26px; border-radius:7px; border:1px solid rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; color:#9AA0A8;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></div>
+          </div>
+          <div style="padding:14px 14px 10px;">
+            <div style="display:flex; align-items:center; gap:9px; height:38px; padding:0 13px; background:#7FB0FF; color:#102036; border-radius:9px; font-size:13.5px; font-weight:600;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>New chat
+              <span style="margin-left:auto; font-family:'Geist Mono',monospace; font-size:11px; opacity:.6;">⌘N</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:9px; height:36px; padding:0 13px; margin-top:8px; background:#303136; border:1px solid rgba(255,255,255,.06); border-radius:9px; color:#7c828a; font-size:13px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>Search chats
+            </div>
+          </div>
+          <div style="flex:1; overflow:hidden; padding:6px 10px;">
+            <div style="font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.1em; color:#4d535b; text-transform:uppercase; padding:10px 8px 7px;">Today</div>
+            <div style="display:flex; flex-direction:column; gap:1px;">
+              <div style="padding:9px 10px; border-radius:8px; background:#34353B; font-size:13px; color:#F2F3F5; display:flex; align-items:center; gap:9px;"><span style="width:5px;height:5px;border-radius:50%;background:#7FB0FF;flex:none;"></span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Summarize the Q3 research notes</span></div>
+              <div style="padding:9px 10px; border-radius:8px; font-size:13px; color:#9AA0A8; overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Refactor the ingestion pipeline</div>
+              <div style="padding:9px 10px; border-radius:8px; font-size:13px; color:#9AA0A8; overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Draft reply to the vendor SOW</div>
+            </div>
+            <div style="font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.1em; color:#4d535b; text-transform:uppercase; padding:16px 8px 7px;">Yesterday</div>
+            <div style="display:flex; flex-direction:column; gap:1px;">
+              <div style="padding:9px 10px; border-radius:8px; font-size:13px; color:#9AA0A8; overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Explain the WebGPU scheduler</div>
+              <div style="padding:9px 10px; border-radius:8px; font-size:13px; color:#9AA0A8; overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Local embeddings for /docs</div>
+              <div style="padding:9px 10px; border-radius:8px; font-size:13px; color:#9AA0A8; overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Quantization trade-offs Q4 vs Q8</div>
+            </div>
+          </div>
+          <div style="flex:none; border-top:1px solid rgba(255,255,255,.05); padding:12px 14px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; font-size:11px; color:#6b717a; margin-bottom:7px;"><span style="font-family:'Geist Mono',monospace;">LOCAL STORAGE</span><span style="font-family:'Geist Mono',monospace; color:#9AA0A8;">42.6 / 100 GB</span></div>
+            <div style="height:5px; border-radius:4px; background:#3B3C42; overflow:hidden;"><div style="width:42.6%; height:100%; background:#7FB0FF;"></div></div>
+            <div style="display:flex; align-items:center; gap:9px; margin-top:13px;">
+              <div style="width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,#7FB0FF,#B9ACF6); flex:none;"></div>
+              <div style="line-height:1.15;"><div style="font-size:12.5px; font-weight:500;">Ari Mensah</div><div style="font-size:10.5px; color:#5E646C; font-family:'Geist Mono',monospace;">Pro · on-device</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CENTER CHAT -->
+        <div style="flex:1; display:flex; flex-direction:column; min-width:0;">
+          <!-- topbar -->
+          <div style="height:60px; flex:none; display:flex; align-items:center; gap:12px; padding:0 22px; border-bottom:1px solid rgba(255,255,255,.06);">
+            <div style="display:flex; align-items:center; gap:9px; height:36px; padding:0 13px; background:#303136; border:1px solid rgba(255,255,255,.07); border-radius:9px;">
+              <span style="width:7px;height:7px;border-radius:2px;background:#7FB0FF;"></span>
+              <span style="font-size:13.5px; font-weight:600;">Q-Flow 30B</span>
+              <span style="font-family:'Geist Mono',monospace; font-size:11px; color:#5E646C;">· Q5_K_M</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7c828a" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+            <div style="display:flex; align-items:center; gap:7px; height:30px; padding:0 11px; background:rgba(127,176,255,.1); border:1px solid rgba(127,176,255,.22); border-radius:20px;">
+              <span style="width:6px;height:6px;border-radius:50%;background:#7FB0FF; animation:zpulse 2.4s infinite;"></span>
+              <span style="font-family:'Geist Mono',monospace; font-size:11px; color:#7FB0FF; letter-spacing:0.02em;">LOCAL · 0 COPIES SENT</span>
+            </div>
+            <div style="margin-left:auto; display:flex; gap:8px;">
+              <div style="width:34px; height:34px; border-radius:9px; border:1px solid rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; color:#9AA0A8;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V22a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 6.6 20a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H1a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 2.6 8"/></svg></div>
+              <div style="width:34px; height:34px; border-radius:9px; border:1px solid rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; color:#9AA0A8;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+            </div>
+          </div>
+
+          <!-- thread -->
+          <div style="flex:1; overflow:hidden; padding:30px 0;">
+            <div style="max-width:760px; margin:0 auto; padding:0 28px;">
+              <!-- user msg -->
+              <div style="display:flex; justify-content:flex-end; margin-bottom:26px;">
+                <div style="max-width:78%; background:#303137; border:1px solid rgba(255,255,255,.05); padding:13px 16px; border-radius:14px 14px 4px 14px; font-size:14.5px; line-height:1.55; color:#F2F3F5;">Summarize the Q3 research notes in <span style="font-family:'Geist Mono',monospace; font-size:13px; background:#25262A; padding:1px 6px; border-radius:5px; color:#7FB0FF;">/docs</span> — without anything leaving this machine.</div>
+              </div>
+              <!-- assistant msg -->
+              <div style="display:flex; gap:13px;">
+                <div style="width:30px;height:30px;border-radius:8px;background:#232C3C;flex:none;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 28 28"><path d="M9 9 H19 L9 19 H19" stroke="#7FB0FF" stroke-width="2.3" fill="none" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+                <div style="min-width:0; flex:1;">
+                  <div style="display:flex; align-items:center; gap:9px; margin-bottom:9px;"><span style="font-size:13px; font-weight:600;">Q-Flow 30B</span><span style="font-family:'Geist Mono',monospace; font-size:10.5px; color:#5E646C; background:#303136; padding:2px 7px; border-radius:5px;">3 docs · 11,204 tok ctx</span></div>
+                  <div style="font-size:14.5px; line-height:1.66; color:#D4D7DB;">
+                    Across the three Q3 notes, the throughline is that <span style="color:#fff;">on-device inference closed the latency gap</span> with the hosted baseline once the scheduler moved to WebGPU. Three findings stand out:
+                    <div style="margin:14px 0; padding-left:4px; display:flex; flex-direction:column; gap:9px;">
+                      <div style="display:flex; gap:11px;"><span style="color:#7FB0FF; font-family:'Geist Mono',monospace; flex:none;">01</span><span>Median time-to-first-token dropped to <span style="font-family:'Geist Mono',monospace; color:#fff;">240ms</span> on the M-series test rig — within 8% of the cloud control.</span></div>
+                      <div style="display:flex; gap:11px;"><span style="color:#7FB0FF; font-family:'Geist Mono',monospace; flex:none;">02</span><span>Q5_K_M kept answer quality within <span style="font-family:'Geist Mono',monospace; color:#fff;">1.4%</span> of full precision while halving VRAM.</span></div>
+                      <div style="display:flex; gap:11px;"><span style="color:#7FB0FF; font-family:'Geist Mono',monospace; flex:none;">03</span><span>Zero bytes left the device across all 1,902 evaluation runs — the privacy guarantee held end to end<span style="display:inline-block; width:8px; height:17px; background:#7FB0FF; margin-left:3px; vertical-align:-3px; animation:zblink 1s infinite;"></span></span></div>
+                    </div>
+                  </div>
+                  <div style="display:flex; gap:7px; margin-top:14px;">
+                    <div style="height:30px; display:flex; align-items:center; gap:6px; padding:0 11px; border:1px solid rgba(255,255,255,.08); border-radius:8px; font-size:12px; color:#9AA0A8;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</div>
+                    <div style="height:30px; display:flex; align-items:center; gap:6px; padding:0 11px; border:1px solid rgba(255,255,255,.08); border-radius:8px; font-size:12px; color:#9AA0A8;">Regenerate</div>
+                    <div style="height:30px; display:flex; align-items:center; gap:6px; padding:0 11px; border-radius:8px; font-size:12px; color:#5E646C; margin-left:auto; font-family:'Geist Mono',monospace;">48 tok/s</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- composer -->
+          <div style="flex:none; padding:0 28px 24px;">
+            <div style="max-width:760px; margin:0 auto;">
+              <div style="background:#2E2F34; border:1px solid rgba(255,255,255,.09); border-radius:15px; padding:14px 15px;">
+                <div style="font-size:14.5px; color:#5E646C;">Ask anything — it runs right here…</div>
+                <div style="display:flex; align-items:center; margin-top:16px;">
+                  <div style="display:flex; gap:7px;">
+                    <div style="width:32px;height:32px;border-radius:8px;border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#9AA0A8;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg></div>
+                    <div style="height:32px; display:flex; align-items:center; gap:7px; padding:0 11px; border-radius:8px; border:1px solid rgba(255,255,255,.08); color:#9AA0A8; font-size:12.5px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.4 11.05L12 20.45a5.5 5.5 0 0 1-7.78-7.78l8.49-8.49a3.67 3.67 0 0 1 5.18 5.18l-8.49 8.49a1.83 1.83 0 0 1-2.6-2.6l7.79-7.78"/></svg>3 docs attached</div>
+                    <div style="height:32px; display:flex; align-items:center; gap:7px; padding:0 11px; border-radius:8px; border:1px solid rgba(255,255,255,.08); color:#9AA0A8; font-size:12.5px; font-family:'Geist Mono',monospace;">temp 0.7</div>
+                  </div>
+                  <div style="margin-left:auto; width:38px; height:38px; border-radius:10px; background:#7FB0FF; display:flex; align-items:center; justify-content:center; color:#102036;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+                </div>
+              </div>
+              <div style="text-align:center; font-size:11px; color:#4d535b; margin-top:11px; font-family:'Geist Mono',monospace;">No network calls · responses generated on-device · nothing logged</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT PANEL -->
+        <div style="width:312px; flex:none; background:#25262A; border-left:1px solid rgba(255,255,255,.06); display:flex; flex-direction:column;">
+          <div style="height:60px; flex:none; display:flex; align-items:center; gap:4px; padding:0 14px; border-bottom:1px solid rgba(255,255,255,.05);">
+            <div style="font-size:12.5px; font-weight:600; padding:7px 12px; background:#34353B; border-radius:8px;">Resources</div>
+            <div style="font-size:12.5px; color:#7c828a; padding:7px 12px;">Model</div>
+            <div style="font-size:12.5px; color:#7c828a; padding:7px 12px;">Docs</div>
+          </div>
+          <div style="flex:1; overflow:hidden; padding:18px 16px;">
+            <!-- tokens/s hero -->
+            <div style="background:#2E2F34; border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:15px;">
+              <div style="display:flex; align-items:baseline; gap:8px;"><span style="font-family:'Geist Mono',monospace; font-size:32px; font-weight:600; color:#fff; letter-spacing:-0.02em;">48.2</span><span style="font-size:12px; color:#7c828a;">tokens / sec</span></div>
+              <svg width="100%" height="46" viewBox="0 0 260 46" preserveAspectRatio="none" style="margin-top:10px;">
+                <polyline points="0,34 20,30 40,33 60,22 80,26 100,16 120,20 140,12 160,18 180,10 200,15 220,8 240,13 260,9" fill="none" stroke="#7FB0FF" stroke-width="2"/>
+                <polyline points="0,34 20,30 40,33 60,22 80,26 100,16 120,20 140,12 160,18 180,10 200,15 220,8 240,13 260,9 260,46 0,46" fill="rgba(127,176,255,.10)" stroke="none"/>
+              </svg>
+            </div>
+            <!-- meters -->
+            <div style="margin-top:16px; display:flex; flex-direction:column; gap:15px;">
+              <div>
+                <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:7px;"><span style="color:#9AA0A8;">GPU</span><span style="font-family:'Geist Mono',monospace; color:#F2F3F5;">62%</span></div>
+                <div style="height:6px; border-radius:4px; background:#3B3C42; overflow:hidden;"><div style="width:62%;height:100%;background:#7FB0FF;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:7px;"><span style="color:#9AA0A8;">VRAM</span><span style="font-family:'Geist Mono',monospace; color:#F2F3F5;">9.4 / 12 GB</span></div>
+                <div style="height:6px; border-radius:4px; background:#3B3C42; overflow:hidden;"><div style="width:78%;height:100%;background:#7FB0FF;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:7px;"><span style="color:#9AA0A8;">System RAM</span><span style="font-family:'Geist Mono',monospace; color:#F2F3F5;">21.7 / 64 GB</span></div>
+                <div style="height:6px; border-radius:4px; background:#3B3C42; overflow:hidden;"><div style="width:34%;height:100%;background:#6b717a;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:7px;"><span style="color:#9AA0A8;">Context window</span><span style="font-family:'Geist Mono',monospace; color:#F2F3F5;">11.2K / 32K</span></div>
+                <div style="height:6px; border-radius:4px; background:#3B3C42; overflow:hidden;"><div style="width:35%;height:100%;background:#F2D27E;"></div></div>
+              </div>
+            </div>
+            <div style="margin-top:18px; padding:13px 14px; background:#2b2740; border:1px solid rgba(185,172,246,.28); border-radius:11px; display:flex; gap:11px;">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B9ACF6" stroke-width="2" style="flex:none; margin-top:1px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <div><div style="font-size:12.5px; font-weight:600; color:#C8BCFA;">Air-gapped session</div><div style="font-size:11.5px; color:#9aa0c4; line-height:1.45; margin-top:3px;">Network access blocked. 0 bytes transmitted this session.</div></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ---------- DIRECTION B: FOCUS ---------- -->
+    <div style="flex:none; width:1440px;">
+      <div style="font-family:'Geist Mono',monospace; font-size:11.5px; letter-spacing:0.06em; color:#56564f; text-transform:uppercase; margin-bottom:13px;">Direction B — &ldquo;Focus&rdquo; · centered canvas, telemetry HUD</div>
+      <div style="width:1440px; height:900px; background:#1B1C1F; border-radius:12px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.28); border:1px solid rgba(0,0,0,.4); display:flex; color:#F2F3F5; position:relative;">
+        <!-- slim icon rail -->
+        <div style="width:68px; flex:none; background:#1C1D20; border-right:1px solid rgba(255,255,255,.05); display:flex; flex-direction:column; align-items:center; padding:16px 0;">
+          <svg width="30" height="30" viewBox="0 0 28 28" style="margin-bottom:24px;"><rect width="28" height="28" rx="9" fill="#232C3C"/><path d="M9 9 H19 L9 19 H19" stroke="#7FB0FF" stroke-width="2.3" fill="none" stroke-linejoin="round" stroke-linecap="round"/></svg>
+          <div style="display:flex; flex-direction:column; gap:6px; align-items:center;">
+            <div style="width:40px;height:40px;border-radius:11px;background:#16181B;display:flex;align-items:center;justify-content:center;color:#7FB0FF;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <div style="width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#6b717a;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+            <div style="width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#6b717a;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 3 5-6"/></svg></div>
+            <div style="width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#6b717a;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div>
+          </div>
+          <div style="margin-top:auto; width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#7FB0FF,#B9ACF6);"></div>
+        </div>
+
+        <!-- main -->
+        <div style="flex:1; display:flex; flex-direction:column; min-width:0; position:relative;">
+          <!-- floating HUD -->
+          <div style="position:absolute; top:22px; right:26px; display:flex; gap:9px; z-index:3;">
+            <div style="display:flex; align-items:center; gap:7px; height:34px; padding:0 13px; background:rgba(14,15,18,.7); backdrop-filter:blur(12px); border:1px solid rgba(127,176,255,.22); border-radius:10px;"><span style="width:6px;height:6px;border-radius:50%;background:#7FB0FF; animation:zpulse 2.4s infinite;"></span><span style="font-family:'Geist Mono',monospace; font-size:11px; color:#7FB0FF;">0 COPIES</span></div>
+            <div style="display:flex; align-items:center; gap:14px; height:34px; padding:0 14px; background:rgba(14,15,18,.7); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,.08); border-radius:10px; font-family:'Geist Mono',monospace; font-size:11px; color:#9AA0A8;">
+              <span><span style="color:#fff;">48</span> tok/s</span><span style="width:1px;height:14px;background:rgba(255,255,255,.1);"></span><span>GPU <span style="color:#fff;">62%</span></span><span style="width:1px;height:14px;background:rgba(255,255,255,.1);"></span><span>VRAM <span style="color:#fff;">9.4G</span></span>
+            </div>
+          </div>
+
+          <!-- big centered thread -->
+          <div style="flex:1; overflow:hidden; padding:78px 0 0;">
+            <div style="max-width:720px; margin:0 auto; padding:0 28px;">
+              <div style="font-family:'Geist Mono',monospace; font-size:11px; letter-spacing:0.08em; color:#4d535b; text-transform:uppercase; margin-bottom:30px;">Q-FLOW 30B · Q5_K_M · ON-DEVICE</div>
+              <div style="display:flex; justify-content:flex-end; margin-bottom:34px;">
+                <div style="max-width:80%; font-size:17px; line-height:1.5; color:#fff; font-weight:500;">Summarize the Q3 research notes in /docs — without anything leaving this machine.</div>
+              </div>
+              <div style="font-size:17px; line-height:1.72; color:#C9CDD2; font-weight:300;">
+                Across the three Q3 notes, the throughline is that on-device inference closed the latency gap with the hosted baseline once the scheduler moved to WebGPU.
+                <div style="margin:22px 0; display:flex; flex-direction:column; gap:14px;">
+                  <div style="display:flex; gap:14px; align-items:baseline;"><span style="color:#7FB0FF; font-family:'Geist Mono',monospace; font-size:14px; flex:none;">01</span><span>Median time-to-first-token fell to <span style="font-family:'Geist Mono',monospace; color:#fff; font-size:15px;">240ms</span> — within 8% of the cloud control.</span></div>
+                  <div style="display:flex; gap:14px; align-items:baseline;"><span style="color:#7FB0FF; font-family:'Geist Mono',monospace; font-size:14px; flex:none;">02</span><span>Q5_K_M held quality within <span style="font-family:'Geist Mono',monospace; color:#fff; font-size:15px;">1.4%</span> of full precision at half the VRAM.</span></div>
+                  <div style="display:flex; gap:14px; align-items:baseline;"><span style="color:#7FB0FF; font-family:'Geist Mono',monospace; font-size:14px; flex:none;">03</span><span>Zero bytes left the device across all 1,902 runs.<span style="display:inline-block; width:9px; height:19px; background:#7FB0FF; margin-left:4px; vertical-align:-4px; animation:zblink 1s infinite;"></span></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- composer -->
+          <div style="flex:none; padding:0 28px 34px;">
+            <div style="max-width:720px; margin:0 auto;">
+              <div style="background:#2A2B30; border:1px solid rgba(255,255,255,.1); border-radius:18px; padding:18px 20px; box-shadow:0 12px 40px rgba(0,0,0,.3);">
+                <div style="font-size:16px; color:#5E646C;">Reply to Q-Flow…</div>
+                <div style="display:flex; align-items:center; margin-top:20px;">
+                  <div style="display:flex; gap:18px; font-size:13px; color:#7c828a; align-items:center;">
+                    <span style="display:flex; align-items:center; gap:7px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.4 11.05L12 20.45a5.5 5.5 0 0 1-7.78-7.78l8.49-8.49a3.67 3.67 0 0 1 5.18 5.18l-8.49 8.49"/></svg>Attach</span>
+                    <span style="display:flex; align-items:center; gap:7px; font-family:'Geist Mono',monospace;">temp 0.7</span>
+                    <span style="display:flex; align-items:center; gap:7px; font-family:'Geist Mono',monospace;">32K ctx</span>
+                  </div>
+                  <div style="margin-left:auto; width:42px; height:42px; border-radius:12px; background:#7FB0FF; display:flex; align-items:center; justify-content:center; color:#102036;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- DIRECTION C: COMMAND ---------- -->
+    <div style="flex:none; width:1440px;">
+      <div style="font-family:'Geist Mono',monospace; font-size:11.5px; letter-spacing:0.06em; color:#56564f; text-transform:uppercase; margin-bottom:13px;">Direction C — &ldquo;Command&rdquo; · palette-driven, iridescent</div>
+      <div style="width:1440px; height:900px; background:radial-gradient(120% 80% at 50% -10%, #2a2740 0%, #1B1C1F 52%); border-radius:12px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.28); border:1px solid rgba(0,0,0,.4); color:#F2F3F5; position:relative;">
+        <!-- dim chat behind -->
+        <div style="position:absolute; inset:0; padding:40px 0; opacity:.32;">
+          <div style="max-width:760px; margin:0 auto; padding:0 28px;">
+            <div style="display:flex; justify-content:flex-end; margin-bottom:26px;"><div style="background:#303137; padding:13px 16px; border-radius:14px; font-size:14.5px;">Summarize the Q3 research notes in /docs.</div></div>
+            <div style="font-size:14.5px; line-height:1.66; color:#C9CDD2; max-width:90%;">Across the three Q3 notes, the throughline is that on-device inference closed the latency gap with the hosted baseline once the scheduler moved to WebGPU. Three findings stand out across throughput, quality and privacy…</div>
+          </div>
+        </div>
+        <!-- top status -->
+        <div style="position:absolute; top:22px; left:26px; display:flex; align-items:center; gap:11px; z-index:2;">
+          <svg width="26" height="26" viewBox="0 0 28 28"><rect width="28" height="28" rx="8" fill="#232C3C"/><path d="M9 9 H19 L9 19 H19" stroke="#7FB0FF" stroke-width="2.3" fill="none" stroke-linejoin="round" stroke-linecap="round"/></svg>
+          <span style="font-size:13.5px; font-weight:600;">Z3 Q-Flow</span>
+        </div>
+        <div style="position:absolute; top:24px; right:26px; display:flex; align-items:center; gap:7px; height:30px; padding:0 12px; background:rgba(127,176,255,.1); border:1px solid rgba(127,176,255,.24); border-radius:20px; z-index:2;"><span style="width:6px;height:6px;border-radius:50%;background:#7FB0FF;"></span><span style="font-family:'Geist Mono',monospace; font-size:11px; color:#7FB0FF;">LOCAL · 0 COPIES SENT</span></div>
+
+        <!-- command palette -->
+        <div style="position:absolute; top:148px; left:50%; transform:translateX(-50%); width:640px; background:rgba(18,20,23,.82); backdrop-filter:blur(28px); border:1px solid rgba(255,255,255,.12); border-radius:18px; box-shadow:0 40px 90px rgba(0,0,0,.55), 0 0 0 1px rgba(127,176,255,.06); overflow:hidden; z-index:5;">
+          <div style="display:flex; align-items:center; gap:13px; padding:20px 22px; border-bottom:1px solid rgba(255,255,255,.07);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7FB0FF" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+            <div style="font-size:18px; color:#F2F3F5;">switch model to <span style="color:#fff; font-weight:500;">Q-Flow 30B</span><span style="display:inline-block; width:2px; height:20px; background:#7FB0FF; margin-left:2px; vertical-align:-4px; animation:zblink 1s infinite;"></span></div>
+            <span style="margin-left:auto; font-family:'Geist Mono',monospace; font-size:11px; color:#5E646C; border:1px solid rgba(255,255,255,.1); border-radius:6px; padding:3px 8px;">⌘K</span>
+          </div>
+          <div style="padding:10px;">
+            <div style="font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.1em; color:#4d535b; text-transform:uppercase; padding:8px 12px 6px;">Local Models</div>
+            <div style="display:flex; align-items:center; gap:13px; padding:12px 14px; border-radius:11px; background:linear-gradient(90deg, rgba(127,176,255,.14), rgba(127,176,255,.02));">
+              <div style="width:34px;height:34px;border-radius:9px;background:#232C3C;flex:none;display:flex;align-items:center;justify-content:center;"><span style="font-family:'Geist Mono',monospace; font-size:11px; color:#7FB0FF; font-weight:600;">30B</span></div>
+              <div style="flex:1;"><div style="font-size:14px; font-weight:500;">Q-Flow 30B</div><div style="font-size:11.5px; color:#7c828a; font-family:'Geist Mono',monospace;">Q5_K_M · 19.8 GB · installed</div></div>
+              <span style="width:7px;height:7px;border-radius:50%;background:#7FB0FF;"></span>
+              <span style="font-family:'Geist Mono',monospace; font-size:10.5px; color:#5E646C;">↵</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:13px; padding:12px 14px; border-radius:11px;">
+              <div style="width:34px;height:34px;border-radius:9px;background:#16181B;flex:none;display:flex;align-items:center;justify-content:center;"><span style="font-family:'Geist Mono',monospace; font-size:11px; color:#9AA0A8; font-weight:600;">8B</span></div>
+              <div style="flex:1;"><div style="font-size:14px; font-weight:500;">Q-Flow 8B Turbo</div><div style="font-size:11.5px; color:#7c828a; font-family:'Geist Mono',monospace;">Q4_K_M · 4.9 GB · installed</div></div>
+              <span style="font-family:'Geist Mono',monospace; font-size:10.5px; color:#5E646C;">112 tok/s</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:13px; padding:12px 14px; border-radius:11px;">
+              <div style="width:34px;height:34px;border-radius:9px;background:#16181B;flex:none;display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9AA0A8" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
+              <div style="flex:1;"><div style="font-size:14px; font-weight:500;">Q-Flow Vision 12B</div><div style="font-size:11.5px; color:#7c828a; font-family:'Geist Mono',monospace;">Q5_K_M · 7.6 GB · download</div></div>
+            </div>
+            <div style="font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.1em; color:#4d535b; text-transform:uppercase; padding:14px 12px 6px;">Actions</div>
+            <div style="display:flex; align-items:center; gap:13px; padding:12px 14px; border-radius:11px; color:#C9CDD2;">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9AA0A8" stroke-width="2" style="flex:none;"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 3 5-6"/></svg>
+              <div style="flex:1; font-size:14px;">Open resource monitor</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- bottom tokens graph -->
+        <div style="position:absolute; bottom:0; left:0; right:0; height:120px; z-index:1;">
+          <svg width="100%" height="120" viewBox="0 0 1440 120" preserveAspectRatio="none">
+            <defs><linearGradient id="ig" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(185,172,246,.24)"/><stop offset="1" stop-color="rgba(127,176,255,0)"/></linearGradient></defs>
+            <polyline points="0,90 80,82 160,86 240,66 320,72 400,50 480,58 560,40 640,52 720,34 800,44 880,28 960,40 1040,24 1120,36 1200,22 1280,32 1360,18 1440,26" fill="none" stroke="rgba(185,172,246,.55)" stroke-width="1.5"/>
+            <polyline points="0,90 80,82 160,86 240,66 320,72 400,50 480,58 560,40 640,52 720,34 800,44 880,28 960,40 1040,24 1120,36 1200,22 1280,32 1360,18 1440,26 1440,120 0,120" fill="url(#ig)" stroke="none"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ======================= SECTION 2: SUPPORTING SCREENS ======================= -->
+  <div style="margin-bottom:22px;">
+    <div style="font-size:13px; font-weight:600; color:#16181B; font-family:'Geist Mono',monospace; letter-spacing:0.04em;">02 — SUPPORTING SCREENS · LEADING DIRECTION (STUDIO)</div>
+    <div style="font-size:14px; color:#7a7a76; margin-top:6px;">Model library &amp; download management, the full resource monitor, and the parameters / system-prompt panel.</div>
+  </div>
+
+  <div style="display:flex; gap:56px; align-items:flex-start;">
+
+    <!-- MODEL LIBRARY -->
+    <div style="flex:none; width:1440px;">
+      <div style="font-family:'Geist Mono',monospace; font-size:11.5px; letter-spacing:0.06em; color:#56564f; text-transform:uppercase; margin-bottom:13px;">Model library · download &amp; storage</div>
+      <div style="width:1440px; height:900px; background:#202125; border-radius:12px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.28); border:1px solid rgba(0,0,0,.4); display:flex; color:#F2F3F5;">
+        <!-- reuse slim rail look -->
+        <div style="width:68px; flex:none; background:#1C1D20; border-right:1px solid rgba(255,255,255,.05); display:flex; flex-direction:column; align-items:center; padding:16px 0;">
+          <svg width="30" height="30" viewBox="0 0 28 28" style="margin-bottom:24px;"><rect width="28" height="28" rx="9" fill="#232C3C"/><path d="M9 9 H19 L9 19 H19" stroke="#7FB0FF" stroke-width="2.3" fill="none" stroke-linejoin="round" stroke-linecap="round"/></svg>
+          <div style="display:flex; flex-direction:column; gap:6px; align-items:center;">
+            <div style="width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#6b717a;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <div style="width:40px;height:40px;border-radius:11px;background:#16181B;display:flex;align-items:center;justify-content:center;color:#7FB0FF;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+            <div style="width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#6b717a;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 3 5-6"/></svg></div>
+          </div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; min-width:0;">
+          <!-- header -->
+          <div style="flex:none; padding:34px 40px 24px; border-bottom:1px solid rgba(255,255,255,.06);">
+            <div style="display:flex; align-items:flex-end; justify-content:space-between;">
+              <div>
+                <div style="font-size:26px; font-weight:600; letter-spacing:-0.02em;">Model Library</div>
+                <div style="font-size:14px; color:#9AA0A8; margin-top:5px;">7 models installed · zero-copy, run fully locally</div>
+              </div>
+              <div style="width:320px;">
+                <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:8px;"><span style="color:#9AA0A8; font-family:'Geist Mono',monospace;">LOCAL DISK</span><span style="font-family:'Geist Mono',monospace; color:#F2F3F5;">42.6 / 100 GB</span></div>
+                <div style="height:8px; border-radius:5px; background:#3B3C42; overflow:hidden; display:flex;"><div style="width:20%;height:100%;background:#7FB0FF;"></div><div style="width:14%;height:100%;background:#B9ACF6;"></div><div style="width:9%;height:100%;background:#6b717a;"></div></div>
+                <div style="display:flex; gap:14px; margin-top:9px; font-size:10.5px; color:#7c828a; font-family:'Geist Mono',monospace;"><span style="display:flex;align-items:center;gap:5px;"><span style="width:7px;height:7px;border-radius:2px;background:#7FB0FF;"></span>Q-Flow</span><span style="display:flex;align-items:center;gap:5px;"><span style="width:7px;height:7px;border-radius:2px;background:#B9ACF6;"></span>Embeddings</span><span style="display:flex;align-items:center;gap:5px;"><span style="width:7px;height:7px;border-radius:2px;background:#6b717a;"></span>Other</span></div>
+              </div>
+            </div>
+            <div style="display:flex; gap:8px; margin-top:24px;">
+              <div style="height:34px; display:flex; align-items:center; padding:0 14px; background:#34353B; border-radius:9px; font-size:12.5px; font-weight:500;">All models</div>
+              <div style="height:34px; display:flex; align-items:center; padding:0 14px; border:1px solid rgba(255,255,255,.08); border-radius:9px; font-size:12.5px; color:#9AA0A8;">Installed</div>
+              <div style="height:34px; display:flex; align-items:center; padding:0 14px; border:1px solid rgba(255,255,255,.08); border-radius:9px; font-size:12.5px; color:#9AA0A8;">Chat</div>
+              <div style="height:34px; display:flex; align-items:center; padding:0 14px; border:1px solid rgba(255,255,255,.08); border-radius:9px; font-size:12.5px; color:#9AA0A8;">Vision</div>
+              <div style="height:34px; display:flex; align-items:center; padding:0 14px; border:1px solid rgba(255,255,255,.08); border-radius:9px; font-size:12.5px; color:#9AA0A8;">Embeddings</div>
+              <div style="margin-left:auto; height:34px; display:flex; align-items:center; gap:8px; padding:0 13px; border:1px solid rgba(255,255,255,.08); border-radius:9px; font-size:12.5px; color:#9AA0A8; font-family:'Geist Mono',monospace;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M7 12h10M10 18h4"/></svg>Size ↓</div>
+            </div>
+          </div>
+          <!-- grid -->
+          <div style="flex:1; overflow:hidden; padding:26px 40px;">
+            <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:18px;">
+
+              <!-- card: active/installed -->
+              <div style="background:#2C2D32; border:1px solid rgba(127,176,255,.3); border-radius:14px; padding:18px;">
+                <div style="display:flex; align-items:center; gap:11px;">
+                  <div style="width:42px;height:42px;border-radius:11px;background:#232C3C;display:flex;align-items:center;justify-content:center;"><span style="font-family:'Geist Mono',monospace; font-size:13px; color:#7FB0FF; font-weight:600;">30B</span></div>
+                  <div><div style="font-size:14.5px; font-weight:600;">Q-Flow 30B</div><div style="font-size:11.5px; color:#7c828a; font-family:'Geist Mono',monospace;">flagship · reasoning</div></div>
+                  <span style="margin-left:auto; font-family:'Geist Mono',monospace; font-size:10px; color:#7FB0FF; background:rgba(127,176,255,.12); padding:3px 8px; border-radius:6px;">ACTIVE</span>
+                </div>
+                <div style="display:flex; gap:18px; margin:16px 0; font-size:11.5px;">
+                  <div><div style="color:#5E646C; font-family:'Geist Mono',monospace; font-size:10px;">SIZE</div><div style="font-family:'Geist Mono',monospace; color:#F2F3F5; margin-top:3px;">19.8 GB</div></div>
+                  <div><div style="color:#5E646C; font-family:'Geist Mono',monospace; font-size:10px;">QUANT</div><div style="font-family:'Geist Mono',monospace; color:#F2F3F5; margin-top:3px;">Q5_K_M</div></div>
+                  <div><div style="color:#5E646C; font-family:'Geist Mono',monospace; font-size:10px;">CTX</div><div style="font-family:'Geist Mono',monospace; color:#F2F3F5; margin-top:3px;">32K</div></div>
+                </div>
+                <div style="height:34px; display:flex; align-items:center; justify-content:center; gap:7px; border:1px solid rgba(255,255,255,.1); border-radius:9px; font-size:12.5px; color:#9AA0A8;">Zero-copy · mapped in VRAM</div>
+              </div>
+
+              <!-- card: installed turbo -->
+              <div style="background:#2C2D32; border:1px solid rgba(255,255,255,.07); border-radius:14px; padding:18px;">
+                <div style="display:flex; align-items:center; gap:11px;">
+                  <div style="width:42px;height:42px;border-radius:11px;background:#16181B;display:flex;align-items:center;justify-content:center;"><span style="font-family:'Geist Mono',monospace; font-size:13px; color:#9AA0A8; font-weight:600;">8B</span></div>
+                  <div><div style="font-size:14.5px; font-weight:600;">Q-Flow 8B Turbo</div><div style="font-size:11.5px; color:#7c828a; font-family:'Geist Mono',monospace;">fast · everyday</div></div>
+                </div>
+                <div style="display:flex; gap:18px; margin:16px 0; font-size:11.5px;">
+                  <div><div style="color:#5E646C; font-family:'Geist Mono',monospace; font-size:10px;">SIZE</div><div style="font-family:'Geist Mono',monospace; color:#F2F3F5; margin-top:3px;">4.9 GB</div></div>
+                  <div><div style="color:#5E646C; font-family:'Geist Mono',monospace; font-size:10px;">QUANT</div><div style="font-family:'Geist Mono',monospace; color:#F2F3F5; margin-top:3px;">Q4_K_M</div></div>
+                  <div><div style="color:#5E646C; font-family:'Geist Mono',monospace; font-size:10px;">SPEED</div><div style="font-family:'Geist Mono',monospace; color:#7FB0FF; margin-top:3px;">112 t/s</div></div>
+                </div>
+                <div style="height:34px; display:flex; align-items:center; justify-content:center; gap:7px; background:#34353B; border-radius:9px; font-size:12.5px; font-weight:500;">Load model</div>
+              </div>
+
+              <!-- card: downloading -->
+              <div style="background:#2C2D32; border:1px solid rgba(255,255,255,.07); border-radius:14px; padding:18px;">
+                <div style="display:flex; align-items:center; gap:11px;">
+                  <div style="width:42px;height:42px;border-radius:11px;background:#16181B;display:flex;align-items:center;justify-content:center;"><span style="font-family:'Geist Mono',monospace; font-size:11px; color:#9AA0A8; font-weight:600;">12B</span></div>
+                  <div><div style="font-size:14.5px; font-weight:600;">Q-Flow Vision 12B</div><div style="font-size:11.5px; color:#7c828a; font-family:'Geist Mono',monospace;">multimodal</div></div>
+                </div>
+                <div style="margin:18px 0 14px;">
+                  <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:7px; font-family:'Geist Mono',monospace;"><span style="color:#7FB0FF;">DOWNLOADING</span><span style="color:#F2F3F5;">64% · 2.7 GB left</span></div>
+                  <div style="height:6px; border-radius:4px; background:#3B3C42; overflow:hidden;"><div style="width:64%;height:100%;background:#7FB0FF;"></div></div>
+                </div>
+                <div style="height:34px; display:flex; align-items:center; justify-content:center; gap:7px; border:1px solid rgba(255,255,255,.1); border-radius:9px; font-size:12.5px; color:#9AA0A8;">Pause</div>
+              </div>
+
+              <!-- card: not installed -->
+              <div style="background:#2A2B2F; border:1px solid rgba(255,255,255,.06); border-radius:14px; padding:18px;">
+                <div style="display:flex; align-items:center; gap:11px;">
+                  <div style="width:42px;height:42px;border-radius:11px;background:#2E2F34;display:flex;align-items:center;justify-content:center;"><span style="font-family:'Geist Mono',monospace; font-size:11px; color:#6b717a; font-weight:600;">70B</span></div>
+                  <div><div style="font-size:14.5px; font-weight:600; color:#C9CDD2;">Q-Flow 70B Max</div><div style="font-size:11.5px; color:#5E646C; font-family:'Geist Mono',monospace;">research-grade</div></div>
+                </div>
+                <div style="display:flex; gap:18px; margin:16px 0; font-size:11.5px;">
+                  <div><div style="color:#4d535b; font-family:'Geist Mono',monospace; font-size:10px;">SIZE</div><div style="font-family:'Geist Mono',monospace; color:#9AA0A8; margin-top:3px;">42.1 GB</div></div>
+                  <div><div style="color:#4d535b; font-family:'Geist Mono',monospace; font-size:10px;">NEEDS</div><div style="font-family:'Geist Mono',monospace; color:#9AA0A8; margin-top:3px;">48 GB VRAM</div></div>
+                </div>
+                <div style="height:34px; display:flex; align-items:center; justify-content:center; gap:7px; background:#34353B; border-radius:9px; font-size:12.5px; font-weight:500; color:#7FB0FF;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Download</div>
+              </div>
+
+              <!-- card: embeddings installed -->
+              <div style="background:#2C2D32; border:1px solid rgba(255,255,255,.07); border-radius:14px; padding:18px;">
+                <div style="display:flex; align-items:center; gap:11px;">
+                  <div style="width:42px;height:42px;border-radius:11px;background:#33283a;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F0A6C9" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 7l3 3M17 7l-3 3M7 17l3-3M17 17l-3-3"/></svg></div>
+                  <div><div style="font-size:14.5px; font-weight:600;">Q-Embed v2</div><div style="font-size:11.5px; color:#7c828a; font-family:'Geist Mono',monospace;">RAG · /docs index</div></div>
+                </div>
+                <div style="display:flex; gap:18px; margin:16px 0; font-size:11.5px;">
+                  <div><div style="color:#5E646C; font-family:'Geist Mono',monospace; font-size:10px;">SIZE</div><div style="font-family:'Geist Mono',monospace; color:#F2F3F5; margin-top:3px;">0.9 GB</div></div>
+                  <div><div style="color:#5E646C; font-family:'Geist Mono',monospace; font-size:10px;">DIM</div><div style="font-family:'Geist Mono',monospace; color:#F2F3F5; margin-top:3px;">1024</div></div>
+                </div>
+                <div style="height:34px; display:flex; align-items:center; justify-content:center; gap:7px; border:1px solid rgba(240,166,201,.3); border-radius:9px; font-size:12.5px; color:#F0A6C9;">Indexing 3 docs</div>
+              </div>
+
+              <!-- card: not installed coder -->
+              <div style="background:#2A2B2F; border:1px solid rgba(255,255,255,.06); border-radius:14px; padding:18px;">
+                <div style="display:flex; align-items:center; gap:11px;">
+                  <div style="width:42px;height:42px;border-radius:11px;background:#2E2F34;display:flex;align-items:center;justify-content:center;"><span style="font-family:'Geist Mono',monospace; font-size:11px; color:#6b717a; font-weight:600;">14B</span></div>
+                  <div><div style="font-size:14.5px; font-weight:600; color:#C9CDD2;">Q-Flow Coder 14B</div><div style="font-size:11.5px; color:#5E646C; font-family:'Geist Mono',monospace;">code · tools</div></div>
+                </div>
+                <div style="display:flex; gap:18px; margin:16px 0; font-size:11.5px;">
+                  <div><div style="color:#4d535b; font-family:'Geist Mono',monospace; font-size:10px;">SIZE</div><div style="font-family:'Geist Mono',monospace; color:#9AA0A8; margin-top:3px;">8.4 GB</div></div>
+                  <div><div style="color:#4d535b; font-family:'Geist Mono',monospace; font-size:10px;">QUANT</div><div style="font-family:'Geist Mono',monospace; color:#9AA0A8; margin-top:3px;">Q5_K_M</div></div>
+                </div>
+                <div style="height:34px; display:flex; align-items:center; justify-content:center; gap:7px; background:#34353B; border-radius:9px; font-size:12.5px; font-weight:500; color:#7FB0FF;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Download</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESOURCE MONITOR -->
+    <div style="flex:none; width:1440px;">
+      <div style="font-family:'Geist Mono',monospace; font-size:11.5px; letter-spacing:0.06em; color:#56564f; text-transform:uppercase; margin-bottom:13px;">Resource monitor · live hardware telemetry</div>
+      <div style="width:1440px; height:900px; background:#202125; border-radius:12px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.28); border:1px solid rgba(0,0,0,.4); display:flex; flex-direction:column; color:#F2F3F5;">
+        <div style="flex:none; padding:30px 40px 22px; border-bottom:1px solid rgba(255,255,255,.06); display:flex; align-items:center; justify-content:space-between;">
+          <div>
+            <div style="font-size:24px; font-weight:600; letter-spacing:-0.02em;">Resource Monitor</div>
+            <div style="font-size:13px; color:#9AA0A8; margin-top:4px; font-family:'Geist Mono',monospace;">Q-Flow 30B · Q5_K_M · zero-copy runtime, on-device</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:7px; height:32px; padding:0 13px; background:rgba(127,176,255,.1); border:1px solid rgba(127,176,255,.22); border-radius:20px;"><span style="width:6px;height:6px;border-radius:50%;background:#7FB0FF; animation:zpulse 2.4s infinite;"></span><span style="font-family:'Geist Mono',monospace; font-size:11px; color:#7FB0FF;">0 BYTES TRANSMITTED · SESSION 00:42:18</span></div>
+        </div>
+        <div style="flex:1; overflow:hidden; padding:26px 40px; display:grid; grid-template-columns:1.6fr 1fr; grid-template-rows:auto 1fr; gap:18px;">
+
+          <!-- big throughput graph -->
+          <div style="grid-column:1; grid-row:1 / span 2; background:#2A2B30; border:1px solid rgba(255,255,255,.06); border-radius:16px; padding:22px; display:flex; flex-direction:column;">
+            <div style="display:flex; align-items:flex-start; justify-content:space-between;">
+              <div><div style="font-size:13px; color:#9AA0A8;">Generation throughput</div><div style="display:flex; align-items:baseline; gap:8px; margin-top:6px;"><span style="font-family:'Geist Mono',monospace; font-size:44px; font-weight:600; color:#fff; letter-spacing:-0.02em;">48.2</span><span style="font-size:13px; color:#7c828a;">tokens / sec</span></div></div>
+              <div style="text-align:right; font-family:'Geist Mono',monospace; font-size:11px; color:#7c828a; line-height:1.8;"><div>peak <span style="color:#F2F3F5;">61.4</span></div><div>avg <span style="color:#F2F3F5;">44.9</span></div><div>ttft <span style="color:#F0A6C9;">240ms</span></div><div>mem copies <span style="color:#7FB0FF;">0</span></div></div>
+            </div>
+            <div style="flex:1; margin-top:18px; position:relative;">
+              <svg width="100%" height="100%" viewBox="0 0 740 320" preserveAspectRatio="none" style="display:block;">
+                <defs><linearGradient id="mg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(240,166,201,.30)"/><stop offset="1" stop-color="rgba(127,176,255,0)"/></linearGradient></defs>
+                <line x1="0" y1="80" x2="740" y2="80" stroke="rgba(255,255,255,.05)"/><line x1="0" y1="160" x2="740" y2="160" stroke="rgba(255,255,255,.05)"/><line x1="0" y1="240" x2="740" y2="240" stroke="rgba(255,255,255,.05)"/>
+                <polyline points="0,240 50,210 100,225 150,150 200,175 250,120 300,140 350,95 400,130 450,80 500,110 550,60 600,95 650,55 700,85 740,50" fill="none" stroke="#F0A6C9" stroke-width="2.5" stroke-linejoin="round"/>
+                <polyline points="0,240 50,210 100,225 150,150 200,175 250,120 300,140 350,95 400,130 450,80 500,110 550,60 600,95 650,55 700,85 740,50 740,320 0,320" fill="url(#mg)" stroke="none"/>
+              </svg>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-family:'Geist Mono',monospace; font-size:10px; color:#4d535b; margin-top:10px;"><span>-60s</span><span>-45s</span><span>-30s</span><span>-15s</span><span>now</span></div>
+          </div>
+
+          <!-- top right: GPU + VRAM gauges -->
+          <div style="grid-column:2; grid-row:1; display:flex; gap:18px;">
+            <div style="flex:1; background:#2A2B30; border:1px solid rgba(255,255,255,.06); border-radius:16px; padding:20px; display:flex; flex-direction:column; align-items:center;">
+              <div style="font-size:12px; color:#9AA0A8; align-self:flex-start;">GPU</div>
+              <svg width="110" height="110" viewBox="0 0 120 120" style="margin:8px 0;">
+                <circle cx="60" cy="60" r="50" fill="none" stroke="#3B3C42" stroke-width="11"/>
+                <circle cx="60" cy="60" r="50" fill="none" stroke="#7FB0FF" stroke-width="11" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="119" transform="rotate(-90 60 60)"/>
+                <text x="60" y="58" text-anchor="middle" fill="#fff" font-family="Geist Mono, monospace" font-size="26" font-weight="600">62</text>
+                <text x="60" y="76" text-anchor="middle" fill="#7c828a" font-family="Geist Mono, monospace" font-size="11">%</text>
+              </svg>
+              <div style="font-family:'Geist Mono',monospace; font-size:10.5px; color:#7c828a;">M-series · 76°C</div>
+            </div>
+            <div style="flex:1; background:#2A2B30; border:1px solid rgba(255,255,255,.06); border-radius:16px; padding:20px; display:flex; flex-direction:column; align-items:center;">
+              <div style="font-size:12px; color:#9AA0A8; align-self:flex-start;">VRAM</div>
+              <svg width="110" height="110" viewBox="0 0 120 120" style="margin:8px 0;">
+                <circle cx="60" cy="60" r="50" fill="none" stroke="#3B3C42" stroke-width="11"/>
+                <circle cx="60" cy="60" r="50" fill="none" stroke="#B9ACF6" stroke-width="11" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="69" transform="rotate(-90 60 60)"/>
+                <text x="60" y="58" text-anchor="middle" fill="#fff" font-family="Geist Mono, monospace" font-size="22" font-weight="600">9.4</text>
+                <text x="60" y="76" text-anchor="middle" fill="#7c828a" font-family="Geist Mono, monospace" font-size="10">/ 12 GB</text>
+              </svg>
+              <div style="font-family:'Geist Mono',monospace; font-size:10.5px; color:#7c828a;">78% allocated</div>
+            </div>
+          </div>
+
+          <!-- bottom right: bars + process -->
+          <div style="grid-column:2; grid-row:2; background:#2A2B30; border:1px solid rgba(255,255,255,.06); border-radius:16px; padding:20px; display:flex; flex-direction:column; gap:16px;">
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:8px;"><span style="color:#9AA0A8;">System RAM</span><span style="font-family:'Geist Mono',monospace; color:#F2F3F5;">21.7 / 64 GB</span></div>
+              <div style="height:7px; border-radius:5px; background:#3B3C42; overflow:hidden;"><div style="width:34%;height:100%;background:#6b717a;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:8px;"><span style="color:#9AA0A8;">CPU</span><span style="font-family:'Geist Mono',monospace; color:#F2F3F5;">18%</span></div>
+              <div style="height:7px; border-radius:5px; background:#3B3C42; overflow:hidden;"><div style="width:18%;height:100%;background:#6b717a;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:8px;"><span style="color:#9AA0A8;">Context window</span><span style="font-family:'Geist Mono',monospace; color:#F2F3F5;">11.2K / 32K</span></div>
+              <div style="height:7px; border-radius:5px; background:#3B3C42; overflow:hidden;"><div style="width:35%;height:100%;background:#F2D27E;"></div></div>
+            </div>
+            <div style="margin-top:auto; border-top:1px solid rgba(255,255,255,.06); padding-top:14px;">
+              <div style="display:flex; justify-content:space-between; font-size:11.5px; font-family:'Geist Mono',monospace; color:#7c828a; margin-bottom:9px;"><span>PROCESS</span><span>POWER</span></div>
+              <div style="display:flex; justify-content:space-between; font-size:12.5px; margin-bottom:7px;"><span>qflow-runtime</span><span style="font-family:'Geist Mono',monospace; color:#F2F3F5;">38.2 W</span></div>
+              <div style="display:flex; justify-content:space-between; font-size:12.5px; color:#9AA0A8;"><span>q-embed indexer</span><span style="font-family:'Geist Mono',monospace;">4.1 W</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARAMETERS PANEL -->
+    <div style="flex:none; width:460px;">
+      <div style="font-family:'Geist Mono',monospace; font-size:11.5px; letter-spacing:0.06em; color:#56564f; text-transform:uppercase; margin-bottom:13px;">Parameters &amp; system prompt</div>
+      <div style="width:460px; height:900px; background:#25262A; border-radius:12px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.28); border:1px solid rgba(0,0,0,.4); display:flex; flex-direction:column; color:#F2F3F5;">
+        <div style="flex:none; padding:24px 24px 20px; border-bottom:1px solid rgba(255,255,255,.06); display:flex; align-items:center; justify-content:space-between;">
+          <div style="font-size:17px; font-weight:600;">Parameters</div>
+          <div style="font-family:'Geist Mono',monospace; font-size:10.5px; color:#7FB0FF; background:rgba(127,176,255,.1); padding:4px 9px; border-radius:6px;">Q-FLOW 30B</div>
+        </div>
+        <div style="flex:1; overflow:hidden; padding:22px 24px;">
+          <!-- system prompt -->
+          <div style="font-size:12px; color:#9AA0A8; margin-bottom:9px; display:flex; justify-content:space-between;"><span>System prompt</span><span style="font-family:'Geist Mono',monospace; color:#5E646C;">312 / 8K</span></div>
+          <div style="background:#2E2F34; border:1px solid rgba(255,255,255,.08); border-radius:11px; padding:14px; font-size:13px; line-height:1.6; color:#C9CDD2; height:128px;">You are a private, on-device research assistant. Answer only from the attached local documents. Never fabricate sources. Keep everything on this machine.<span style="display:inline-block; width:2px; height:15px; background:#7FB0FF; margin-left:1px; vertical-align:-3px; animation:zblink 1s infinite;"></span></div>
+
+          <!-- sliders -->
+          <div style="margin-top:24px; display:flex; flex-direction:column; gap:22px;">
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:11px;"><span style="color:#F2F3F5;">Temperature</span><span style="font-family:'Geist Mono',monospace; color:#7FB0FF;">0.70</span></div>
+              <div style="height:5px; border-radius:4px; background:#3B3C42; position:relative;"><div style="width:35%; height:100%; background:#7FB0FF; border-radius:4px;"></div><div style="position:absolute; left:35%; top:50%; transform:translate(-50%,-50%); width:16px; height:16px; border-radius:50%; background:#fff; box-shadow:0 1px 4px rgba(0,0,0,.4);"></div></div>
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:11px;"><span style="color:#F2F3F5;">Top-p</span><span style="font-family:'Geist Mono',monospace; color:#9AA0A8;">0.90</span></div>
+              <div style="height:5px; border-radius:4px; background:#3B3C42; position:relative;"><div style="width:90%; height:100%; background:#6b717a; border-radius:4px;"></div><div style="position:absolute; left:90%; top:50%; transform:translate(-50%,-50%); width:16px; height:16px; border-radius:50%; background:#fff; box-shadow:0 1px 4px rgba(0,0,0,.4);"></div></div>
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:11px;"><span style="color:#F2F3F5;">Context length</span><span style="font-family:'Geist Mono',monospace; color:#9AA0A8;">32,768</span></div>
+              <div style="height:5px; border-radius:4px; background:#3B3C42; position:relative;"><div style="width:64%; height:100%; background:#6b717a; border-radius:4px;"></div><div style="position:absolute; left:64%; top:50%; transform:translate(-50%,-50%); width:16px; height:16px; border-radius:50%; background:#fff; box-shadow:0 1px 4px rgba(0,0,0,.4);"></div></div>
+              <div style="font-size:11px; color:#7c828a; margin-top:9px; font-family:'Geist Mono',monospace;">↑ longer context uses more VRAM (≈ +2.1 GB)</div>
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:11px;"><span style="color:#F2F3F5;">Max tokens</span><span style="font-family:'Geist Mono',monospace; color:#9AA0A8;">2,048</span></div>
+              <div style="height:5px; border-radius:4px; background:#3B3C42; position:relative;"><div style="width:25%; height:100%; background:#6b717a; border-radius:4px;"></div><div style="position:absolute; left:25%; top:50%; transform:translate(-50%,-50%); width:16px; height:16px; border-radius:50%; background:#fff; box-shadow:0 1px 4px rgba(0,0,0,.4);"></div></div>
+            </div>
+          </div>
+
+          <!-- toggles -->
+          <div style="margin-top:26px; display:flex; flex-direction:column; gap:2px; border-top:1px solid rgba(255,255,255,.06); padding-top:18px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 0;">
+              <div><div style="font-size:13.5px;">Use /docs (RAG)</div><div style="font-size:11.5px; color:#7c828a; margin-top:2px;">Ground answers in local files</div></div>
+              <div style="width:40px; height:23px; border-radius:13px; background:#7FB0FF; position:relative; flex:none;"><div style="position:absolute; right:2px; top:2px; width:19px; height:19px; border-radius:50%; background:#102036;"></div></div>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 0;">
+              <div><div style="font-size:13.5px;">Air-gap mode</div><div style="font-size:11.5px; color:#7c828a; margin-top:2px;">Block all network access</div></div>
+              <div style="width:40px; height:23px; border-radius:13px; background:#7FB0FF; position:relative; flex:none;"><div style="position:absolute; right:2px; top:2px; width:19px; height:19px; border-radius:50%; background:#102036;"></div></div>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 0;">
+              <div><div style="font-size:13.5px;">Stream responses</div><div style="font-size:11.5px; color:#7c828a; margin-top:2px;">Render tokens as generated</div></div>
+              <div style="width:40px; height:23px; border-radius:13px; background:#7FB0FF; position:relative; flex:none;"><div style="position:absolute; right:2px; top:2px; width:19px; height:19px; border-radius:50%; background:#102036;"></div></div>
+            </div>
+          </div>
+        </div>
+        <div style="flex:none; padding:16px 24px; border-top:1px solid rgba(255,255,255,.06); display:flex; gap:10px;">
+          <div style="flex:1; height:38px; display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,.1); border-radius:10px; font-size:13px; color:#9AA0A8;">Reset</div>
+          <div style="flex:1; height:38px; display:flex; align-items:center; justify-content:center; background:#7FB0FF; color:#102036; border-radius:10px; font-size:13px; font-weight:600;">Save preset</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+    </div><!--/stage content-->
+  </div><!--/stage-->
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;mood&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Soothing&quot;,&quot;Balanced&quot;,&quot;Vivid&quot;],&quot;default&quot;:&quot;Soothing&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;atmosphere&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Studio&quot;,&quot;Spotlight&quot;,&quot;Aurora&quot;],&quot;default&quot;:&quot;Aurora&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;light&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Cool&quot;,&quot;Neutral&quot;,&quot;Warm&quot;],&quot;default&quot;:&quot;Warm&quot;,&quot;tsType&quot;:&quot;string&quot;}}">class Component extends DCLogic {
+  renderVals() {
+    const mood = this.props.mood || 'Balanced';
+    const atmosphere = this.props.atmosphere || 'Studio';
+    const light = this.props.light || 'Neutral';
+
+    const moodF = {
+      Soothing: 'saturate(0.7) contrast(0.97) brightness(1.03)',
+      Balanced: 'saturate(1) contrast(1) brightness(1)',
+      Vivid:    'saturate(1.42) contrast(1.06) brightness(1.02)'
+    }[mood] || '';
+
+    const lightF = {
+      Cool:    'hue-rotate(-12deg) saturate(1.05) brightness(1.02)',
+      Neutral: '',
+      Warm:    'sepia(0.16) saturate(1.07) hue-rotate(-8deg)'
+    }[light] || '';
+
+    const atmosShadow = {
+      Studio:    '',
+      Spotlight: 'drop-shadow(0 46px 95px rgba(0,0,0,0.5))',
+      Aurora:    'drop-shadow(0 0 64px rgba(150,160,255,0.45))'
+    }[atmosphere] || '';
+
+    const filter = [moodF, lightF, atmosShadow].filter(Boolean).join(' ') || 'none';
+
+    const atmosBg = {
+      Studio:    'transparent',
+      Spotlight: 'radial-gradient(72% 56% at 50% 26%, rgba(255,255,255,0.55), rgba(255,255,255,0) 70%)',
+      Aurora:    'radial-gradient(40% 40% at 18% 16%, rgba(127,176,255,0.30), transparent 70%), radial-gradient(46% 46% at 84% 30%, rgba(185,172,246,0.28), transparent 72%), radial-gradient(52% 46% at 60% 94%, rgba(240,166,201,0.24), transparent 72%)'
+    }[atmosphere] || 'transparent';
+
+    return {
+      stageStyle: { position: 'relative', filter: filter, transition: 'filter .35s ease' },
+      atmosStyle: { position: 'absolute', inset: '0', zIndex: 0, pointerEvents: 'none', background: atmosBg, transition: 'background .35s ease' }
+    };
+  }
+}</script>
+</body>
+</html>
