@@ -16,6 +16,6 @@ log = "0.4"
 reqwest = { version = "0.11", features = ["json"] }
 tokio = { version = "1", features = ["full"] }
 env_logger = "0.11"
-qfz3 = { path = "../qfz3-engine" }
+qfz3 = { path = "../../qfz3/qfz3-engine" }
 axum = "0.7"
 tower = { version = "0.4", features = ["full"] }

@@ -88,11 +88,7 @@ impl InferenceProvider for GroqProvider {
             .send()
             .await?;
 
-        let raw = resp.text().await?;
-        eprintln!("Raw Groq response: {}", raw);
         println!("{:?} {:?}", resp.status(), resp.headers());
-        let raw = resp.text().await?;
-        eprintln!("Raw Groq response: {}", raw);
         println!("{:?} {:?}", resp.status(), resp.headers());
         let parsed: GroqResponse = resp.json().await?;
         
@@ -123,11 +119,7 @@ impl InferenceProvider for GroqProvider {
             .send()
             .await?;
 
-        let raw = resp.text().await?;
-        eprintln!("Raw Groq response: {}", raw);
         println!("{:?} {:?}", resp.status(), resp.headers());
-        let raw = resp.text().await?;
-        eprintln!("Raw Groq response: {}", raw);
         println!("{:?} {:?}", resp.status(), resp.headers());
         let parsed: GroqResponse = resp.json().await?;
         let elapsed = start.elapsed().as_millis() as u64;
