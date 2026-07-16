@@ -46,6 +46,6 @@ pub async fn route_request(message: &str, providers: &HashMap<ProviderType, Arc<
         }
     };
     let elapsed = start.elapsed().as_millis() as u64;
-    let metadata = RouteMetadata { provider: provider_type, model_used, route_taken, input_tokens, output_tokens: estimate_token_count(&output), cost_incurred: 0.0, tokens_saved, savings_vs_cloud: savings, processing_time_ms: elapsed, steps: vec![] };
+    let metadata = RouteMetadata { provider: provider_type, model_used, route_taken, input_tokens, output_tokens: estimate_token_count(&output), cost_incurred: 0.0, tokens_saved, savings_vs_cloud: savings, processing_time_ms: elapsed, steps: vec![], stop_reason: "unknown".to_string() };
     Ok(ProviderResponse { output, metadata })
 }

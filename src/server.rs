@@ -24,7 +24,7 @@ pub async fn run_server(
     };
 
     println!("Server configuration:");
-    println!("  Local: Qwen2.5-Coder (zero-copy)");
+    println!("  Local: {} (zero-copy)", model_path);
     if cloud_providers.anthropic.is_some() { println!("  Cloud: Anthropic Claude enabled"); }
     if cloud_providers.groq.is_some() { println!("  Cloud: Groq enabled"); }
     if cloud_providers.gemini.is_some() { println!("  Cloud: Gemini enabled"); }
@@ -100,6 +100,7 @@ async fn chat_groq(
             cost_incurred: 0.0, tokens_saved: 0,
             savings_vs_cloud: 0.0, processing_time_ms: 0,
             warnings: vec!["groq_not_configured".to_string()],
+            stop_reason: "not_configured".to_string(),
         }),
     }
 }
@@ -128,6 +129,7 @@ async fn chat_gemini(
             cost_incurred: 0.0, tokens_saved: 0,
             savings_vs_cloud: 0.0, processing_time_ms: 0,
             warnings: vec!["gemini_not_configured".to_string()],
+            stop_reason: "not_configured".to_string(),
         }),
     }
 }
@@ -156,6 +158,7 @@ async fn chat_anthropic(
             cost_incurred: 0.0, tokens_saved: 0,
             savings_vs_cloud: 0.0, processing_time_ms: 0,
             warnings: vec!["anthropic_not_configured".to_string()],
+            stop_reason: "not_configured".to_string(),
         }),
     }
 }
@@ -173,6 +176,7 @@ fn to_chat_response(r: crate::providers::ProviderResponse) -> ChatResponse {
         savings_vs_cloud: r.metadata.savings_vs_cloud,
         processing_time_ms: r.metadata.processing_time_ms as u128,
         warnings: r.metadata.steps,
+        stop_reason: r.metadata.stop_reason,
     }
 }
 
@@ -186,6 +190,7 @@ fn error_response(e: anyhow::Error) -> ChatResponse {
         cost_incurred: 0.0, tokens_saved: 0,
         savings_vs_cloud: 0.0, processing_time_ms: 0,
         warnings: vec![e.to_string()],
+        stop_reason: "error".to_string(),
     }
 }
 

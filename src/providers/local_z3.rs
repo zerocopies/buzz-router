@@ -1,6 +1,7 @@
 use async_trait::async_trait;
 use std::sync::Mutex;
 use qfz3::Engine;
+use qfz3::engine::StopReason;
 use crate::providers::{InferenceProvider, ProviderType, ProviderResponse, RouteMetadata};
 
 pub struct LocalZ3Provider {
@@ -55,34 +56,49 @@ impl InferenceProvider for LocalZ3Provider {
         let tokens = max_tokens.unwrap_or(self.max_tokens) as i32;
         let prompt_owned = prompt.to_string();
         let mut engine = self.engine.lock().map_err(|e| anyhow::anyhow!("Engine lock poisoned: {}", e))?;
+        // Reset per request — see generate_tracked for why.
+        engine.reset();
         let (output, _tok_count) = engine.generate_sync(&prompt_owned.as_str(), tokens).map_err(|e| anyhow::anyhow!("{}", e))?;
         Ok(output)
     }
 
     async fn generate_tracked(&self, prompt: &str, max_tokens: Option<usize>) -> Result<ProviderResponse, anyhow::Error> {
         let max_tok = max_tokens.unwrap_or(self.max_tokens) as i32;
-        let input_tokens = self.estimate_tokens(prompt);
         let prompt_owned = prompt.to_string();
 
         let mut engine = self.engine.lock().map_err(|e| anyhow::anyhow!("Engine lock poisoned: {}", e))?;
-        let (output, output_tok_count) = engine.generate_sync(&prompt_owned.as_str(), max_tok).map_err(|e| anyhow::anyhow!("{}", e))?;
+        // Reset KV cache + turn counter so every HTTP request is an
+        // independent conversation. Without this, request N's tokens get
+        // silently appended to request N-1's KV state via
+        // build_followup_chat_tokens, producing answers that respond to
+        // the WRONG prompt — confirmed live: a fresh "moons of Jupiter"
+        // query answered as a continuation of a prior, unrelated request.
+        engine.reset();
+        let out = engine.generate_rich(&prompt_owned, max_tok).map_err(|e| anyhow::anyhow!("{}", e))?;
         drop(engine);
 
-        let output_tokens = output_tok_count as usize;
+        // Real tokenizer counts from the engine (prompt_tokens/completion_tokens),
+        // not the char_len/4 heuristic this used to call via estimate_tokens().
+        let stop_reason = match out.stop_reason {
+            StopReason::EndOfTurn => "end_turn",
+            StopReason::MaxTokens => "max_tokens",
+        }.to_string();
+        let processing_time_ms = (out.prompt_ms + out.generate_ms).round() as u64;
 
         Ok(ProviderResponse {
-            output,
+            output: out.text,
             metadata: RouteMetadata {
                 provider: self.provider_type(),
                 model_used: self.model_name().to_string(),
                 route_taken: "local_direct".to_string(),
-                input_tokens,
-                output_tokens,
+                input_tokens: out.prompt_tokens,
+                output_tokens: out.completion_tokens,
                 cost_incurred: 0.0,
                 tokens_saved: 0,
                 savings_vs_cloud: 100.0,
-                processing_time_ms: 0,
+                processing_time_ms,
                 steps: vec!["LocalZ3 inference".to_string()],
+                stop_reason,
             },
         })
     }

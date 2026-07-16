@@ -60,6 +60,7 @@ impl InferenceProvider for AnthropicProvider {
                 output_tokens: tokens_out,
                 cost_incurred: cost,
                 tokens_saved: 0,
+                stop_reason: "unknown".to_string(),
                 savings_vs_cloud: 0.0,
                 processing_time_ms: elapsed,
                 steps: vec![format!("Anthropic: {} tokens in {}ms (${:.4})", tokens_in + tokens_out, elapsed, cost)],

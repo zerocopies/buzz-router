@@ -25,4 +25,5 @@ pub struct ChatResponse {
     pub savings_vs_cloud: f64,
     pub processing_time_ms: u128,
     pub warnings: Vec<String>,
+    pub stop_reason: String,
 }

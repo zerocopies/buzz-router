@@ -45,6 +45,7 @@ pub struct RouteMetadata {
     pub savings_vs_cloud: f64,
     pub processing_time_ms: u64,
     pub steps: Vec<String>,
+    pub stop_reason: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

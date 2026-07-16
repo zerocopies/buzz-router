@@ -143,6 +143,7 @@ impl InferenceProvider for GroqProvider {
                 output_tokens,
                 cost_incurred: cost,
                 tokens_saved: 0,
+                stop_reason: "unknown".to_string(),
                 savings_vs_cloud: 0.0,
                 processing_time_ms: elapsed,
                 steps: vec!["Groq API call".to_string()],
