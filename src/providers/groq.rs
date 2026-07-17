@@ -16,6 +16,8 @@ struct GroqResponse {
 struct GroqChoice {
     #[serde(default)]
     message: GroqMessage,
+    #[serde(default)]
+    finish_reason: Option<String>,
 }
 
 #[derive(Debug, Deserialize, Clone, Default)]
@@ -143,7 +145,7 @@ impl InferenceProvider for GroqProvider {
                 output_tokens,
                 cost_incurred: cost,
                 tokens_saved: 0,
-                stop_reason: "unknown".to_string(),
+                stop_reason: parsed.choices[0].finish_reason.clone().unwrap_or_else(|| "unknown".to_string()),
                 savings_vs_cloud: 0.0,
                 processing_time_ms: elapsed,
                 steps: vec!["Groq API call".to_string()],

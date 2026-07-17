@@ -13,6 +13,8 @@ struct GeminiResponse {
 #[derive(Debug, Deserialize, Clone)]
 struct GeminiCandidate {
     content: GeminiContent,
+    #[serde(default, rename = "finishReason")]
+    finish_reason: Option<String>,
 }
 
 #[derive(Debug, Deserialize, Clone)]
@@ -100,7 +102,7 @@ impl InferenceProvider for GeminiProvider {
             output_tokens: parsed.usage_metadata.candidates_token_count,
             cost_incurred: input_cost + output_cost,
             tokens_saved: 0,
-            stop_reason: "unknown".to_string(),
+            stop_reason: parsed.candidates[0].finish_reason.clone().unwrap_or_else(|| "unknown".to_string()),
             savings_vs_cloud: 0.0,
             processing_time_ms: duration,
             steps: vec!["gemini_api_call".to_string()],

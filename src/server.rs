@@ -18,9 +18,9 @@ pub async fn run_server(
     let local_provider = LocalZ3Provider::new(model_path, 2048, 512, Some(SYSTEM_PROMPT))?;
 
     let cloud_providers = CloudProviders {
-        anthropic: anthropic_key.map(|k| Arc::new(AnthropicProvider::new(k, "claude-3-5-haiku-20241022"))),
+        anthropic: anthropic_key.map(|k| Arc::new(AnthropicProvider::new(k, "claude-haiku-4-5"))),
         groq: groq_key.map(|k| Arc::new(GroqProvider::new(k, "llama-3.1-8b-instant"))),
-        gemini: gemini_key.map(|k| Arc::new(GeminiProvider::new(k, "gemini-1.5-flash"))),
+        gemini: gemini_key.map(|k| Arc::new(GeminiProvider::new(k, "gemini-flash-latest"))),
     };
 
     println!("Server configuration:");
