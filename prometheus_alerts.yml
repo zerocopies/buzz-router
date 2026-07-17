@@ -1,0 +1,17 @@
+groups:
+- name: ai_service_alerts
+  rules:
+  - alert: AIHighP95Latency
+    expr: histogram_quantile(0.95, sum(rate(ai_request_duration_ms_bucket[5m])) by (le, route)) > 1000
+    for: 5m
+    labels:
+      severity: page
+    annotations:
+      summary: "AI route {{ $labels.route }} p95 latency > 1000ms"
+  - alert: AIErrorRateSpike
+    expr: (sum(rate(ai_request_errors_total[5m])) by (route)) / (sum(rate(ai_request_total[5m])) by (route)) > 0.05
+    for: 10m
+    labels:
+      severity: ticket
+    annotations:
+      summary: "AI route {{ $labels.route }} error rate > 5%"

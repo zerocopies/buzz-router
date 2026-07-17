@@ -1,8 +1,10 @@
 use axum::{routing::post, routing::get, Router, extract::State, Json};
 use std::sync::Arc;
+use std::collections::HashMap;
 use tokio::net::TcpListener;
 
-use crate::providers::{InferenceProvider, local_z3::LocalZ3Provider, anthropic::AnthropicProvider, groq::GroqProvider, gemini::GeminiProvider};
+use crate::providers::{InferenceProvider, ProviderType, UserPreferences, local_z3::LocalZ3Provider, anthropic::AnthropicProvider, groq::GroqProvider, gemini::GeminiProvider};
+use crate::core::decision::{self, RouteDecision};
 use crate::{AppState, CloudProviders};
 use crate::types::{ChatRequest, ChatResponse};
 
@@ -20,7 +22,7 @@ pub async fn run_server(
     let cloud_providers = CloudProviders {
         anthropic: anthropic_key.map(|k| Arc::new(AnthropicProvider::new(k, "claude-haiku-4-5"))),
         groq: groq_key.map(|k| Arc::new(GroqProvider::new(k, "llama-3.1-8b-instant"))),
-        gemini: gemini_key.map(|k| Arc::new(GeminiProvider::new(k, "gemini-flash-latest"))),
+        gemini: gemini_key.map(|k| Arc::new(GeminiProvider::new(k, "gemini-2.5-flash-lite"))),
     };
 
     println!("Server configuration:");
@@ -53,12 +55,65 @@ pub async fn run_server(
     Ok(())
 }
 
+/// The smart-routing entry point. `mode` on the request lets a caller
+/// bypass the decision engine entirely ("local"/"groq"/"gemini"/"anthropic");
+/// anything else (default: "auto") goes through decide_route().
 async fn chat_handler(
     State(state): State<Arc<AppState>>,
     Json(payload): Json<ChatRequest>,
 ) -> Json<ChatResponse> {
-    // Default: route to local
-    chat_local(State(state), Json(payload)).await
+    match payload.mode.as_str() {
+        "local" => return chat_local(State(state), Json(payload)).await,
+        "groq" => return chat_groq(State(state), Json(payload)).await,
+        "gemini" => return chat_gemini(State(state), Json(payload)).await,
+        "anthropic" => return chat_anthropic(State(state), Json(payload)).await,
+        _ => {}
+    }
+
+    // Provider availability for the decision engine — OpenAI intentionally
+    // omitted (not wired); decide_route treats a missing key as unavailable.
+    let mut available: HashMap<ProviderType, bool> = HashMap::new();
+    available.insert(ProviderType::Local, true);
+    available.insert(ProviderType::Anthropic, state.cloud_providers.anthropic.is_some());
+    available.insert(ProviderType::Groq, state.cloud_providers.groq.is_some());
+    available.insert(ProviderType::Gemini, state.cloud_providers.gemini.is_some());
+
+    // No per-request preference fields on ChatRequest yet — uses the
+    // default (speed: "cheap", force_local: false), which biases toward
+    // Local for anything that isn't flagged sensitive or genuinely huge.
+    let prefs = UserPreferences::default();
+    let est_tokens = decision::estimate_token_count(&payload.prompt);
+    let route = decision::decide_route(&payload.prompt, est_tokens, &prefs, &available);
+
+    let (mut resp, reason) = match &route {
+        RouteDecision::FullLocal { reason, .. } => {
+            let r = reason.clone();
+            (chat_local(State(state.clone()), Json(payload)).await, r)
+        }
+        RouteDecision::FullCloud { provider, reason, .. } => {
+            let r = reason.clone();
+            let resp = match provider {
+                ProviderType::Anthropic => chat_anthropic(State(state.clone()), Json(payload)).await,
+                ProviderType::Groq => chat_groq(State(state.clone()), Json(payload)).await,
+                ProviderType::Gemini => chat_gemini(State(state.clone()), Json(payload)).await,
+                _ => chat_local(State(state.clone()), Json(payload)).await,
+            };
+            (resp, r)
+        }
+        RouteDecision::Hybrid { gen_provider, reason, .. } => {
+            let r = format!("{} (hybrid compression not yet implemented — routed full prompt to cloud)", reason);
+            let resp = match gen_provider {
+                ProviderType::Anthropic => chat_anthropic(State(state.clone()), Json(payload)).await,
+                ProviderType::Groq => chat_groq(State(state.clone()), Json(payload)).await,
+                ProviderType::Gemini => chat_gemini(State(state.clone()), Json(payload)).await,
+                _ => chat_local(State(state.clone()), Json(payload)).await,
+            };
+            (resp, r)
+        }
+    };
+
+    resp.0.warnings.insert(0, format!("auto-route: {}", reason));
+    Json(resp.0)
 }
 
 async fn chat_local(

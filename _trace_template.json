@@ -1,0 +1,23 @@
+{
+  "request_id": "{{REQUEST_ID}}",
+  "timestamp_utc": "{{TIMESTAMP_START}}",
+  "route": "{{ROUTE}}",
+  "provider": "{{PROVIDER}}",
+  "model": "{{MODEL}}",
+  "input_tokens": {{INPUT_TOKENS}},
+  "output_tokens": {{OUTPUT_TOKENS}},
+  "cost_usd": {{COST_USD}},
+  "latency_ms": {{LATENCY_MS}},
+  "step_spans": {{STEP_SPANS}},
+  "retrieval_hits": {{RETRIEVAL_HITS}},
+  "retrieval_score_avg": {{RETRIEVAL_SCORE_AVG}},
+  "response_text": "{{RESPONSE_TEXT}}",
+  "stop_reason": "{{STOP_REASON}}",
+  "error_code": "{{ERROR_CODE}}",
+  "warnings": {{WARNINGS}},
+  "request_payload": {{REQUEST_PAYLOAD}},
+  "response_payload": {{RESPONSE_PAYLOAD}},
+  "http_status": {{HTTP_STATUS}},
+  "correlation_id": "{{CORRELATION_ID}}",
+  "user_id": "{{USER_ID}}"
+}

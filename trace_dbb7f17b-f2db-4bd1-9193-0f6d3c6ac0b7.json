@@ -1,0 +1,23 @@
+{
+  "request_id": "dbb7f17b-f2db-4bd1-9193-0f6d3c6ac0b7",
+  "timestamp_utc": "2026-07-17T04:07:43.300Z",
+  "route": "local",
+  "provider": "Local",
+  "model": "qfz3-local",
+  "input_tokens": 35,
+  "output_tokens": 2,
+  "cost_usd": 0.0,
+  "latency_ms": 4802,
+  "step_spans": [],
+  "retrieval_hits": 0,
+  "retrieval_score_avg": null,
+  "response_text": "Paris.",
+  "stop_reason": "end_turn",
+  "error_code": "",
+  "warnings": [],
+  "request_payload": {"prompt":"What is the capital of France? Answer in one short sentence.","max_tokens":40},
+  "response_payload": {"output":"Paris.","provider":"Local","model_used":"qfz3-local","route_taken":"local_direct","input_tokens":35,"output_tokens":2,"cost_incurred":0.0,"tokens_saved":0,"savings_vs_cloud":100.0,"processing_time_ms":4801,"warnings":["LocalZ3 inference"],"stop_reason":"end_turn"},
+  "http_status": 200,
+  "correlation_id": "",
+  "user_id": ""
+}
