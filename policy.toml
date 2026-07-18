@@ -1,0 +1,11 @@
+[routing]
+force_local_all = false
+always_local_if_sensitive = true
+cloud_threshold = "complex"
+cloud_fallback_order = ["groq", "anthropic"]
+[cost]
+max_per_request_usd = 0.01
+daily_budget_usd = 10.0
+[audit]
+enabled = true
+log_path = "/tmp/buzz-router-audit.jsonl"
